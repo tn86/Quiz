@@ -24,7 +24,7 @@ public class Ende extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ende);
 
-        btnStartseite = (Button) findViewById(R.id.btnStartseite);
+        btnStartseite = findViewById(R.id.btnStartseite);
         btnStartseite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,10 +33,11 @@ public class Ende extends AppCompatActivity {
             }
         });
 
-        tVHighscoreAnzeige = (TextView) findViewById(R.id.tVHighscoreAnzeige);
+        tVHighscoreAnzeige = findViewById(R.id.tVHighscoreAnzeige);
 
         preferences = this.getSharedPreferences("highscore", MODE_PRIVATE);
         preferencesEditor = preferences.edit();
+        preferencesEditor.commit();
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
@@ -53,6 +54,7 @@ public class Ende extends AppCompatActivity {
             tVHighscoreAnzeige.setText("NEUER HIGHSCORE! Deine erreichten Punkte sind: " + erreichtePunkte);
 
             preferencesEditor.putInt(KEY, erreichtePunkte);
+            preferencesEditor.commit();
 
         } else {
             tVHighscoreAnzeige.setText("Deine erreichten Punkte sind " + erreichtePunkte);
